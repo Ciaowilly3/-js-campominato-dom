@@ -2,10 +2,14 @@ const startBtnEl = document.querySelector(".my-btn");
 const difficultyEl = document.querySelector("[name='difficulty']")
 let bombsVector;
 let click = 0;
+// dichiaro oltre a click anche stato gioco per fermare il click dopo aver preso una bomba
+let statoGioco = true;
 
 // quando clicco il bottone prendo il valore della difficoltà inserita e faccio partire la funzione gridCreate
 startBtnEl.addEventListener ("click" , function(){
 
+    // resetto stato gioco a ogni click
+    statoGioco = true;
 
     const difficulty = difficultyEl.value;
 
@@ -54,24 +58,31 @@ function gridCreate (numCell){
         cella.addEventListener("click", onCellClick)
     }
 }
+
 function onCellClick(){
-    this.classList.toggle("bg-primary");
-    numCell = parseInt(this.dataset.numCell);
-    // creo una variabile che sarà data dal numero di celle meno il numero di bombe, cioè il punteggio vittoria 
-    let celleTotali = difficultyEl.value*difficultyEl.value;
-    const pointsToWin = celleTotali - (bombsVector.length);
-    if (bombsVector.includes(numCell)){
-        this.classList.remove("bg-primary");
-        this.classList.add("bg-danger");
-        alert("Hai trovato una bomba, hai terminato la partita con un punteggio di " + click);   
-    }else {
-        click +=1
-    }
-    
-    if(click === pointsToWin){
-        alert("Complimenti hai vinto!!hai terminato la partita con un punteggio di " + click);
+    if (statoGioco){
+        this.classList.toggle("bg-primary");
+        numCell = parseInt(this.dataset.numCell);
+        // creo una variabile che sarà data dal numero di celle meno il numero di bombe, cioè il punteggio vittoria 
+        let celleTotali = difficultyEl.value*difficultyEl.value;
+        const pointsToWin = celleTotali - (bombsVector.length);
+        if (bombsVector.includes(numCell)){
+            this.classList.remove("bg-primary");
+            this.classList.add("bg-danger");
+            alert("Hai trovato una bomba, hai terminato la partita con un punteggio di " + click);  
+            statoGioco = false;
+        }else {
+            click +=1
+        }
+        
+        if(click === pointsToWin){
+            alert("Complimenti hai vinto!!hai terminato la partita con un punteggio di " + click);
+        }
+    }else{
+        alert("che cavolo clicchi se hai perso? Ricarica la pagina o premi il pulsante play!")
     }
 }
+
 
 // genero numero random da 1 a numCelle
 function getRandomNum(min, max) {
