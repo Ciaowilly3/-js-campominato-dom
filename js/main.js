@@ -51,6 +51,7 @@ function gridCreate (numCell){
         cella.classList.add("d-flex");
         cella.classList.add("justify-content-center");
         cella.classList.add("align-items-center");
+        cella.classList.add("cella");
 
         // aggiungo infine l'evento al click di ogni cella, cosa che posso fare perchè 
         // sono dentro un for e ogni cella e a sè, in cui la faccio diventare azzura e stampo
@@ -71,6 +72,11 @@ function onCellClick(){
             this.classList.add("bg-danger");
             alert("Hai trovato una bomba, hai terminato la partita con un punteggio di " + click);  
             statoGioco = false;
+            for (let i=0; i<celleTotali; i++){
+                if (bombsVector.includes(numCell)){
+                    this.classList.add("bg-danger");
+                }
+            }
         }else {
             click +=1
         }
@@ -82,6 +88,7 @@ function onCellClick(){
         alert("che cavolo clicchi se hai perso? Ricarica la pagina o premi il pulsante play!")
     }
 }
+
 
 
 // genero numero random da 1 a numCelle
