@@ -1,0 +1,37 @@
+.input-group .my-btn{
+    background-color: lightgray;
+    border-radius: 4px;
+    padding: 0 24px;
+    border-color: gray;
+    border-width: 1px;
+}
+
+.input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+h1{
+    font-weight: 700;
+}
+
+main{
+    background-color: #7fffd4;
+    padding: 3rem;
+}
+
+#difficultySelector{
+    background-color: lightgray;
+    border-radius: 4px;
+    padding: 0 24px 0 0;
+    border-color: gray;
+    margin-right: 1rem;
+}
+
+.bg-primary{
+    transition: background-color .5s;
+}
+
+.bg-danger{
+    transition: background-color .5s;
+}
