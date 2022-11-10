@@ -1,10 +1,11 @@
 const startBtnEl = document.querySelector(".my-btn");
+const difficultyEl = document.querySelector("[name='difficulty']")
 let bombsVector;
+let click = 0;
 
 // quando clicco il bottone prendo il valore della difficoltà inserita e faccio partire la funzione gridCreate
 startBtnEl.addEventListener ("click" , function(){
 
-    const difficultyEl = document.querySelector("[name='difficulty']")
 
     const difficulty = difficultyEl.value;
 
@@ -56,9 +57,19 @@ function gridCreate (numCell){
 function onCellClick(){
     this.classList.toggle("bg-primary");
     numCell = parseInt(this.dataset.numCell);
+    // creo una variabile che sarà data dal numero di celle meno il numero di bombe, cioè il punteggio vittoria 
+    let celleTotali = difficultyEl.value*difficultyEl.value;
+    const pointsToWin = celleTotali - (bombsVector.length);
     if (bombsVector.includes(numCell)){
         this.classList.remove("bg-primary");
         this.classList.add("bg-danger");
+        alert("Hai trovato una bomba, hai terminato la partita con un punteggio di " + click);   
+    }else {
+        click +=1
+    }
+    
+    if(click === pointsToWin){
+        alert("Complimenti hai vinto!!hai terminato la partita con un punteggio di " + click);
     }
 }
 
